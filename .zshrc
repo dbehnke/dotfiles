@@ -142,7 +142,7 @@ alias sshpublickey="cat ~/.ssh/id_rsa.pub"
 #private zshrc (not included in dotfiles) - keep at end of file 
 #(but before source $ZSH/oh-my-zsh.sh to override
 #any variables in this file with the private ones.
-source .zshrc-private
+source $HOME/.zshrc-private
 
 #now we'll activate oh-my-zsh
 source $ZSH/oh-my-zsh.sh
