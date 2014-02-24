@@ -89,12 +89,12 @@ http-serve-internet() {
 
 #change email for git for working repository
 gitconfig-work() {
-  "Configuring git for work.."
+  echo "Configuring git for work.."
   git config user.email "workemail"
 }
 
 gitconfig-github() {
-  "Configuring git for github.."
+  echo "Configuring git for github.."
   git config user.email "personalemail"
 }
 
