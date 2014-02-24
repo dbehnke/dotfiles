@@ -122,6 +122,17 @@ gitconfig-github() {
   git config user.email "personalemail"
 }
 
+start-btsync() {
+  echo "Attempting to start BitTorrent Sync"
+  $HOME/opt/btsync/btsync
+  xdg-open http://localhost:8888
+}
+
+stop-btsync() {
+  echo "Attempting to stop BitTorrent Sync"
+  killall btsync
+}
+
 ####    Aliases
 
 #sublimetext
