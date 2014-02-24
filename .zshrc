@@ -11,44 +11,68 @@ ZSH_THEME="ys"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git)
 
-#for brew
-export PATH=/usr/local/bin:$PATH
-
 ####    Programming Languages
 
 #go
 export GOPATH=$HOME/go
 
 #Groovy
-export GROOVY_HOME=/usr/local/opt/groovy/libexec
+#I'm not using groovy for anything right now this is just a placeholder
+#export GROOVY_HOME=$HOME/opt/groovy
 
 #nodejs
 export PATH=./node_modules/.bin:$PATH
 
 #ruby
+#TODO fix this next time I need ruby
+[[ -s "$HOME/.profile" ]] && source "$HOME/.profile" # Load the default .profile
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
 PATH=$HOME/.rvm/bin:$PATH # Add RVM to PATH for scripting
-source /Users/dbehnke/.rvm/scripts/rvm
+source $HOME/.rvm/scripts/rvm
 
 #python
-PYTHON_PREFIX=/usr/local/bin
+
+#pyenv - uncomment all if using pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH=$PYENV_ROOT/bin:$PATH
+eval "$(pyenv init -)"
+export PATH=$HOME/.pyenv/shims:$PATH
+
+
+#uncomment if using python in /usr/local/bin
+#PYTHON_PREFIX=/usr/local/bin
 
 use-python3() {
-  export VIRTUALENV_PYTHON=${PYTHON_PREFIX}/python3
-  export VIRTUALENVWRAPPER_PYTHON=${PYTHON_PREFIX}/python3
+  #uncomment if using pyenv - set version to match one of the pyenv versions
+  export PYENV_VERSION=3.3.4
+  pyenv virtualenvwrapper
+
+  #uncomment if not using pyenv
+  #export VIRTUALENV_PYTHON=${PYTHON_PREFIX}/python3
+  #export VIRTUALENVWRAPPER_PYTHON=${PYTHON_PREFIX}/python3
 }
 
 use-python2() {
-  export VIRTUALENV_PYTHON=${PYTHON_PREFIX}/python2
-  export VIRTUALENVWRAPPER_PYTHON=${PYTHON_PREFIX}/python2
+  #uncomment if using pyenv - set version to match one of the pyenv versions
+  export PYENV_VERSION=2.7.6
+  pyenv virtualenvwrapper
+
+  #uncomment if not using pyenv
+  #export VIRTUALENV_PYTHON=${PYTHON_PREFIX}/python2
+  #export VIRTUALENVWRAPPER_PYTHON=${PYTHON_PREFIX}/python2
 }
 
 #set default python
 #use-python2
 use-python3
 
-#virtualenvwrapper (for python)
+#virtualenvwrapper (for python) - these are where virtual environments will be stored
 export WORKON_HOME=${HOME}/python-env
-source ${PYTHON_PREFIX}/virtualenvwrapper.sh
+
+#uncomment if not using pyenv
+#source ${PYTHON_PREFIX}/virtualenvwrapper.sh
 
 #Scala
 export PATH=$HOME/opt/scala/bin:$PATH
@@ -87,7 +111,7 @@ http-serve-internet() {
 
 ####    Helper Functions
 
-#change email for git for working repository
+#change email for git for working repository - copy these to .zshrc-private with correct values
 gitconfig-work() {
   echo "Configuring git for work.."
   git config user.email "workemail"
@@ -101,7 +125,12 @@ gitconfig-github() {
 ####    Aliases
 
 #sublimetext
-alias subl="/Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl"
+#path to executable
+sublime=${HOME}/opt/sublime_text/sublime_text
+
+alias subl="${sublime} -n"
+#this makes sublime the default editor and waits for finish
+export EDITOR="${sublime} -n -w"
 
 #quick edit functions
 alias zshconfig="subl ~/.zshrc"
