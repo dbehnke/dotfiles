@@ -11,6 +11,12 @@ ZSH_THEME="ys"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git)
 
+#debian specific
+alias agi="sudo apt-get -y install"
+alias agu="sudo apt-get -y update"
+alias agU="sudo apt-get -y upgrade"
+alias acs="sudo apt-cache search"
+
 ####    Programming Languages
 
 #go
@@ -157,3 +163,5 @@ source $HOME/.zshrc-private
 
 #now we'll activate oh-my-zsh
 source $ZSH/oh-my-zsh.sh
+
+~/scripts/screenfetch
